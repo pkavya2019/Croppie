@@ -1481,6 +1481,12 @@
             self._originalImageWidth = oldHeight;
             self._originalImageHeight = oldWidth;
         }
+        
+        if ((deg % 180) !== 0) {
+            var lastOriginalHeight = this._originalImageHeight;
+            this._originalImageHeight = this._originalImageWidth;
+            this._originalImageWidth = lastOriginalHeight;
+        }
     }
 
     function _destroy() {
