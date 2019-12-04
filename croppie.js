@@ -210,6 +210,11 @@
                 }, 1);
             };
             img.src = src;
+
+            setTimeout(() => {
+                _hideLoader('loader-canvas');
+            }, 5000);
+
         });
     }
 
@@ -359,19 +364,27 @@
         ctx.restore();
     }
 
-    function _displayLoader(){
-        console.log('_displayLoader')
+    function _displayLoader(className){
+        setTimeout(() => {
+            var spanelement = document.getElementsByClassName(className);  
+                spanelement[0].classList.add('fa');
+                spanelement[0].classList.add('fa-spinner');
+                spanelement[0].classList.add('fa-spin'); 
+        }, 300); 
     }
 
-    function _hideLoader(){
-        console.log('_hideLoader')
+    function _hideLoader(className){
+        setTimeout(() => {
+            var spanelement = document.getElementsByClassName(className);  
+                spanelement[0].classList.remove('fa');
+                spanelement[0].classList.remove('fa-spinner');
+                spanelement[0].classList.remove('fa-spin'); 
+        }, 300);
     }
 
     /* Private Methods */
     function _create() {
-         
-        _displayLoader();
-
+          
         var self = this,
             contClass = 'croppie-container',
             customViewportClass = self.options.viewport.type ? 'cr-vp-' + self.options.viewport.type : null,
@@ -384,9 +397,8 @@
  
         boundary = self.elements.boundary = document.createElement('div');
         loader   = self.elements.loader = document.createElement('span');
-        addClass(loader, 'fa');
-        addClass(loader, 'fa-spinner');
-        addClass(loader, 'fa-spin'); 
+        addClass(loader, 'loader-canvas'); 
+        _displayLoader('loader-canvas');
         viewport = self.elements.viewport = document.createElement('div');
         img = self.elements.img = document.createElement('img');
         overlay = self.elements.overlay = document.createElement('div');
@@ -447,9 +459,7 @@
 
         if (self.options.enableResize) {
             _initializeResize.call(self);
-        }
-
-        _hideLoader();
+        } 
     }
 
     // function _initRotationControls () {
