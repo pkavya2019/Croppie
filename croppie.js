@@ -303,7 +303,7 @@
         canvas.width = img.width;
         canvas.height = img.height;
 
-        ctx.save();
+        ctx.save(); 
         switch (orientation) {
           case 1:
                 canvas.width = height;
@@ -359,8 +359,19 @@
         ctx.restore();
     }
 
+    function _displayLoader(){
+        console.log('_displayLoader')
+    }
+
+    function _hideLoader(){
+        console.log('_hideLoader')
+    }
+
     /* Private Methods */
     function _create() {
+         
+        _displayLoader();
+
         var self = this,
             contClass = 'croppie-container',
             customViewportClass = self.options.viewport.type ? 'cr-vp-' + self.options.viewport.type : null,
@@ -370,11 +381,17 @@
         // Properties on class
         self.data = {};
         self.elements = {};
-
+ 
         boundary = self.elements.boundary = document.createElement('div');
+        loader   = self.elements.loader = document.createElement('span');
+        addClass(loader, 'fa');
+        addClass(loader, 'fa-spinner');
+        addClass(loader, 'fa-spin'); 
         viewport = self.elements.viewport = document.createElement('div');
         img = self.elements.img = document.createElement('img');
         overlay = self.elements.overlay = document.createElement('div');
+
+       
 
         if (self.options.useCanvas) {
             self.elements.canvas = document.createElement('canvas');
@@ -408,6 +425,7 @@
         addClass(overlay, 'cr-overlay');
 
         self.element.appendChild(boundary);
+        boundary.appendChild(loader);
         boundary.appendChild(self.elements.preview);
         boundary.appendChild(viewport);
         boundary.appendChild(overlay);
@@ -430,6 +448,8 @@
         if (self.options.enableResize) {
             _initializeResize.call(self);
         }
+
+        _hideLoader();
     }
 
     // function _initRotationControls () {
@@ -1230,7 +1250,7 @@
             dHeight = (sHeight / height) * canvasHeight;
         }
 
-        console.table({ left, right, top, bottom, canvasWidth, canvasHeight, width, height, startX, startY, circle, sx, sy, dx, dy, sWidth, sHeight, dWidth, dHeight });
+        //console.table({ left, right, top, bottom, canvasWidth, canvasHeight, width, height, startX, startY, circle, sx, sy, dx, dy, sWidth, sHeight, dWidth, dHeight });
 
         ctx.drawImage(this.elements.preview, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
         if (circle) {
