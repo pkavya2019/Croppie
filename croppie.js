@@ -305,6 +305,12 @@
 
         ctx.save();
         switch (orientation) {
+          case 1:
+                canvas.width = height;
+                canvas.height = width;
+                ctx.rotate(90*Math.PI/180);
+                ctx.translate(0, -height);
+                break;
           case 2:
              ctx.translate(width, 0);
              ctx.scale(-1, 1);
