@@ -517,13 +517,13 @@
 
         if (this.options.resizeControls.height) {
             vr = document.createElement('div');
-            addClass(vr, 'cr-resizer-vertical');
+            //addClass(vr, 'cr-resizer-vertical');
             wrap.appendChild(vr);
         }
 
         if (this.options.resizeControls.width) {
             hr = document.createElement('div');
-            addClass(hr, 'cr-resizer-horisontal');
+            //addClass(hr, 'cr-resizer-horisontal');
             wrap.appendChild(hr);
         }
 
